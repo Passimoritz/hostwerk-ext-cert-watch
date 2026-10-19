@@ -1,3 +1,5 @@
+![Certificate watch](banner.svg)
+
 # Certificate watch
 
 All certificates at a glance: how long they are still valid, which expire soon and which public domains don’t have one yet – with a dashboard tile.

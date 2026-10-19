@@ -1,3 +1,5 @@
+![Zertifikats-Wache](banner.svg)
+
 # Zertifikats-Wache
 
 Alle Zertifikate auf einen Blick: wie lange sie noch gelten, welche bald ablaufen und welche öffentlichen Domains noch keines haben – mit Kachel für die Übersicht.
