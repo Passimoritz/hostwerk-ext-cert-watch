@@ -1,0 +1,42 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Passimoritz/hostwerk-public/main/sdk/manifest.schema.json",
+  "id": "cert-watch",
+  "color": "#0f766e",
+  "name": {
+    "de": "Zertifikats-Wache",
+    "en": "Certificate watch"
+  },
+  "description": {
+    "de": "Alle Zertifikate auf einen Blick: wie lange sie noch gelten, welche bald ablaufen und welche öffentlichen Domains noch keines haben – mit Kachel für die Übersicht.",
+    "en": "All certificates at a glance: how long they are still valid, which expire soon and which public domains don’t have one yet – with a dashboard tile."
+  },
+  "permissions": [
+    "read:live"
+  ],
+  "page": {
+    "title": {
+      "de": "Zertifikats-Wache",
+      "en": "Certificate watch"
+    },
+    "description": {
+      "de": "Restlaufzeit aller Zertifikate – Let’s Encrypt, lokales Zertifikat und lokale CA.",
+      "en": "Days left for every certificate – Let’s Encrypt, local certificate and local CA."
+    },
+    "icon": "shield",
+    "file": "page/index.html"
+  },
+  "widget": {
+    "title": {
+      "de": "Zertifikats-Wache",
+      "en": "Certificate watch"
+    },
+    "file": "widget/index.html",
+    "size": "third"
+  },
+  "version": "1.0.0",
+  "author": "Hostwerk",
+  "homepage": "https://github.com/Passimoritz/hostwerk-ext-cert-watch",
+  "license": "MIT",
+  "icon": "icon.svg",
+  "hostwerk": ">=2.9.0"
+}

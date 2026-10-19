@@ -1,0 +1,18 @@
+{
+  "total": "Zertifikate",
+  "soon": "Laufen bald ab",
+  "soonHint": "in den nächsten 30 Tagen",
+  "expired": "Abgelaufen",
+  "none": "Noch keine Zertifikate.",
+  "daysLeft": "noch {n} Tage",
+  "expiredAgo": "seit {n} Tagen abgelaufen",
+  "unknown": "unbekannt",
+  "until": "gültig bis {date}",
+  "counts": "{total} Zertifikate · {soon} bald fällig · {expired} abgelaufen",
+  "kind.letsencrypt": "Let's Encrypt",
+  "kind.staging": "Let's Encrypt (Test)",
+  "kind.local": "Lokales Server-Zertifikat",
+  "kind.ca": "Lokale Zertifizierungsstelle",
+  "missingTitle": "Öffentliche Domains ohne Zertifikat",
+  "missingHint": "Unter Livebetrieb → Domains holt Hostwerk eins mit einem Klick."
+}

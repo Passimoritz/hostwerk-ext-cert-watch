@@ -1,0 +1,18 @@
+{
+  "total": "Certificates",
+  "soon": "Expiring soon",
+  "soonHint": "within the next 30 days",
+  "expired": "Expired",
+  "none": "No certificates yet.",
+  "daysLeft": "{n} days left",
+  "expiredAgo": "expired {n} days ago",
+  "unknown": "unknown",
+  "until": "valid until {date}",
+  "counts": "{total} certificates · {soon} due soon · {expired} expired",
+  "kind.letsencrypt": "Let's Encrypt",
+  "kind.staging": "Let's Encrypt (staging)",
+  "kind.local": "Local server certificate",
+  "kind.ca": "Local certificate authority",
+  "missingTitle": "Public domains without a certificate",
+  "missingHint": "Under Production → Domains, Hostwerk gets one with one click."
+}
