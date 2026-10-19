@@ -21,6 +21,8 @@ async function load() {
     <div class="card">
       ${list.length ? list.map((c) => html`<div class="list-item"><div class="grow" style="min-width:0"><b class="ellipsis">${c.name}</b><div class="small muted">${t('kind.' + c.kind)}${c.sub && c.kind === 'letsencrypt' ? ' · ' + c.sub : ''}${c.expiresAt ? ' · ' + t('until', { date: new Date(c.expiresAt).toLocaleDateString() }) : ''}</div></div><span class="badge ${BADGE[C.level(c.days)]}">${days(c)}</span></div>`) : html`<div class="empty"><p>${t('none')}</p></div>`}
     </div>
+    ${d.remind ? html`<div class="callout ${d.remind.on ? '' : 'warn'}" style="margin-top:14px"><div class="callout-body"><b class="callout-title">${d.remind.on ? t('remindOn') : t('remindOff')}</b><div class="small">${d.remind.on ? t('remindDays', { days: C.daysList(d.remind.days, Hostwerk.info().lang) }) : t('remindOffHint')}</div><div class="row" style="margin-top:6px"><button class="btn sm ghost" id="remindSet">${t('remindSet')}</button></div></div></div>` : ''}
     ${(d.missing || []).length ? html`<div class="callout warn" style="margin-top:14px"><div class="callout-body"><b class="callout-title">${t('missingTitle')}</b>${d.missing.map((m) => html`<div class="small">${m.domain} <span class="muted">(${m.web})</span></div>`)}<div class="small muted">${t('missingHint')}</div></div></div>` : ''}`);
 }
+document.addEventListener('click', (e) => { if (e.target && e.target.closest && e.target.closest('#remindSet')) Hostwerk.navigate('/live/monitor').catch(() => {}); });
 Hostwerk.ready().then(() => { load(); setInterval(load, 600000); Hostwerk.on('lang', load); });

@@ -15,3 +15,9 @@ test('Kurzfassung zählt bald fällige und abgelaufene', () => {
   assert.deepStrictEqual([s.total, s.expired, s.critical, s.soon, s.next.name], [3, 1, 1, 1, 'x']);
 });
 test('Leere Antwort stürzt nicht ab', () => { assert.deepStrictEqual(C.collect(null), []); assert.strictEqual(C.summary([]).next, null); });
+
+test('Erinnerungs-Stufen lesbar aufgezählt', () => {
+  assert.strictEqual(C.daysList([1, 30, 7], 'de'), '30, 7 und 1');
+  assert.strictEqual(C.daysList([14, 3], 'en'), '14 and 3');
+  assert.strictEqual(C.daysList([5], 'de'), '5');
+});

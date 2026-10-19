@@ -16,6 +16,8 @@
     const n = (lv) => list.filter((c) => level(c.days) === lv).length;
     return { total: list.length, expired: n('expired'), critical: n('err'), soon: n('warn'), next: list.find((c) => c.days != null) || null };
   }
-  const api = { level, collect, summary };
+  /** [30, 14, 7] → „30, 14 und 7“ (de) bzw. „30, 14 and 7“ (en) */
+  function daysList(days, lang) { const l = [...(days || [])].map(Number).filter((x) => x > 0).sort((a, b) => b - a); if (l.length < 2) return l.join(''); return `${l.slice(0, -1).join(', ')} ${lang === 'en' ? 'and' : 'und'} ${l[l.length - 1]}`; }
+  const api = { daysList, level, collect, summary };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Certs = api;
 })(typeof window !== 'undefined' ? window : globalThis);

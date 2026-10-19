@@ -14,5 +14,10 @@
   "kind.local": "Local server certificate",
   "kind.ca": "Local certificate authority",
   "missingTitle": "Public domains without a certificate",
-  "missingHint": "Under Production → Domains, Hostwerk gets one with one click."
+  "missingHint": "Under Production → Domains, Hostwerk gets one with one click.",
+  "remindOn": "Hostwerk reminds you",
+  "remindDays": "{days} days before expiry you get one message each – on your phone and the alerts you set up.",
+  "remindOff": "Reminders are off",
+  "remindOffHint": "Switch them on under Going live → Monitoring so no certificate expires unnoticed.",
+  "remindSet": "Set up reminders"
 }

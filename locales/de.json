@@ -14,5 +14,10 @@
   "kind.local": "Lokales Server-Zertifikat",
   "kind.ca": "Lokale Zertifizierungsstelle",
   "missingTitle": "Öffentliche Domains ohne Zertifikat",
-  "missingHint": "Unter Livebetrieb → Domains holt Hostwerk eins mit einem Klick."
+  "missingHint": "Unter Livebetrieb → Domains holt Hostwerk eins mit einem Klick.",
+  "remindOn": "Hostwerk erinnert dich",
+  "remindDays": "{days} Tage vor Ablauf kommt je eine Meldung – aufs Handy und an die eingerichteten Alarme.",
+  "remindOff": "Erinnerungen sind aus",
+  "remindOffHint": "Schalte sie unter Livebetrieb → Überwachung ein, damit kein Zertifikat unbemerkt abläuft.",
+  "remindSet": "Erinnerungen einstellen"
 }
