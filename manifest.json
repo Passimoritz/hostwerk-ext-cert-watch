@@ -1,18 +1,25 @@
 {
   "$schema": "https://raw.githubusercontent.com/Passimoritz/hostwerk-public/main/sdk/manifest.schema.json",
   "id": "cert-watch",
-  "color": "#0f766e",
-  "category": "security",
   "name": {
     "de": "Zertifikats-Wache",
     "en": "Certificate watch"
   },
   "description": {
-    "de": "Alle Zertifikate auf einen Blick: wie lange sie noch gelten, welche bald ablaufen und welche öffentlichen Domains noch keines haben – mit Kachel für die Übersicht.",
-    "en": "All certificates at a glance: how long they are still valid, which expire soon and which public domains don’t have one yet – with a dashboard tile."
+    "de": "Alle Zertifikate auf einen Blick: Hostwerks eigene und beliebige Hosts (Mailserver, Router, fremde Seiten) – Restlaufzeit, Aussteller, Namen, Kette und Schlüssel, fehlende Zertifikate per Knopf, Benachrichtigung vor dem Ablauf. Mit Kachel für die Übersicht.",
+    "en": "All certificates at a glance: Hostwerk’s own and any host (mail server, router, other sites) – time left, issuer, names, chain and key, missing certificates with one button, alerts before they expire. With a dashboard tile."
   },
+  "version": "2.0.0",
+  "author": "Hostwerk",
+  "homepage": "https://github.com/Passimoritz/hostwerk-ext-cert-watch",
+  "license": "MIT",
+  "icon": "icon.svg",
+  "banner": "banner.svg",
+  "color": "#0f766e",
+  "category": "security",
+  "hostwerk": ">=2.11.0",
   "permissions": [
-    "read:live"
+    "native"
   ],
   "page": {
     "title": {
@@ -20,25 +27,83 @@
       "en": "Certificate watch"
     },
     "description": {
-      "de": "Restlaufzeit aller Zertifikate – Let’s Encrypt, lokales Zertifikat und lokale CA.",
-      "en": "Days left for every certificate – Let’s Encrypt, local certificate and local CA."
+      "de": "Restlaufzeit aller Zertifikate – Hostwerks eigene und beliebige Hosts.",
+      "en": "Days left for every certificate – Hostwerk’s own and any host."
     },
     "icon": "shield",
-    "file": "page/index.html"
+    "nav": {
+      "group": "system"
+    }
   },
-  "widget": {
-    "title": {
-      "de": "Zertifikats-Wache",
-      "en": "Certificate watch"
+  "backend": "server/index.js",
+  "ui": "ui/index.js",
+  "settingsTab": "notifications",
+  "settings": [
+    {
+      "key": "warnDays",
+      "type": "number",
+      "label": {
+        "de": "Zertifikate: „bald fällig“ ab (Tage)",
+        "en": "Certificates: “due soon” from (days)"
+      },
+      "default": 30,
+      "min": 1,
+      "max": 365
     },
-    "file": "widget/index.html",
-    "size": "third"
-  },
-  "version": "1.2.0",
-  "author": "Hostwerk",
-  "homepage": "https://github.com/Passimoritz/hostwerk-ext-cert-watch",
-  "license": "MIT",
-  "icon": "icon.svg",
-  "banner": "banner.svg",
-  "hostwerk": ">=2.9.0"
+    {
+      "key": "critDays",
+      "type": "number",
+      "label": {
+        "de": "Zertifikate: „kritisch“ ab (Tage)",
+        "en": "Certificates: “critical” from (days)"
+      },
+      "default": 7,
+      "min": 0,
+      "max": 120
+    },
+    {
+      "key": "notify",
+      "type": "switch",
+      "label": {
+        "de": "Bei bald fälligen Zertifikaten und fehlgeschlagenen Prüfungen benachrichtigen",
+        "en": "Notify about certificates due soon and failed checks"
+      },
+      "default": true
+    },
+    {
+      "key": "interval",
+      "type": "number",
+      "label": {
+        "de": "Hosts prüfen alle (Stunden)",
+        "en": "Check hosts every (hours)"
+      },
+      "default": 6,
+      "min": 1,
+      "max": 48
+    }
+  ],
+  "synergies": [
+    {
+      "with": "uptime-wall",
+      "title": {
+        "de": "Erreichbarkeit und Ablaufdaten nebeneinander",
+        "en": "Uptime and expiry dates side by side"
+      }
+    },
+    {
+      "with": "mail-server",
+      "title": {
+        "de": "Zertifikate des eigenen Mailservers werden von selbst überwacht",
+        "en": "Certificates of your own mail server are watched by themselves"
+      }
+    }
+  ],
+  "provides": [
+    "certWatch"
+  ],
+  "allowExtensions": {
+    "*": [
+      "tabs"
+    ]
+  }
 }
