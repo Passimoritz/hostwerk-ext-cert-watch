@@ -171,7 +171,7 @@ function CertPage() {
 function CertTile() {
   const st = useApi('/cert-watch', [], { poll: false });
   useLive(st.reload);
-  if (!st.data && st.error) return <TileEmpty icon={CloudOff} text={t('Could not load: {error}', { error: st.error })} action="Try again" onClick={() => st.reload()} />;
+  if (!st.data && st.error) return <TileEmpty icon={CloudOff} text={t('Could not load: {error}', { error: st.error })} action={t('Try again')} onClick={() => st.reload()} />;
   if (!st.data) return <div className="card-body"><div className="hw-skeleton cw-skel" /></div>;
   const lim = st.data.limits || C.DEFAULT_LIMITS;
   const list = C.collect(st.data.certs, st.data.hosts);
