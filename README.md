@@ -8,6 +8,7 @@ All certificates at a glance: Hostwerk’s own and any host – how long they ar
 
 ## What it does
 
+- **Where:** Go live → Operate → Certificates and the dashboard tile – no own sidebar entry since 2.1.0; the full page stays under Extensions → Open
 - Let’s Encrypt certificates, the local server certificate and the local certificate authority
 - Any host and port with a TLS handshake: mail servers (465, 993, 995, SMTP 25/587 with STARTTLS), router, NAS, other sites
 - Your own mail servers (extension “Mail server”) are watched by themselves

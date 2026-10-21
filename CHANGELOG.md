@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Lives where it belongs: Go live → Operate → Certificates and the dashboard tile – no own sidebar entry any more (Hostwerk 3.0+); the full page stays under Extensions → Open and can be pinned in the sidebar settings. / Steckt jetzt dort, wo sie hingehört: Livebetrieb → Betrieb → Zertifikate und Übersichtskachel – kein eigener Seitenleisten-Eintrag mehr (Hostwerk 3.0+); die ganze Seite bleibt unter Erweiterungen → Öffnen und lässt sich in den Seitenleisten-Einstellungen anheften.
+
 ## 2.0.0
 
 - Watches any host and port with a TLS handshake – mail servers (also SMTP with STARTTLS), router, NAS, other sites; own mail servers (Stalwart, James) are added by themselves. / Überwacht beliebige Hosts und Ports per TLS-Handshake – Mailserver (auch SMTP mit STARTTLS), Router, NAS, fremde Seiten; eigene Mailserver (Stalwart, James) kommen von selbst dazu.

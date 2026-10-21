@@ -188,6 +188,10 @@ function CertTile() {
 export default {
   pages: { main: CertPage },
   slots: {
+    // Seit Hostwerk 3.0 (SDK 3.2) ohne eigenen Seitenleisten-Eintrag ("nav": false) – die ganze Seite als Reiter im passenden Bereich;
+    // Hostwerk blendet dabei ihren Titel aus (Reiter + Herkunftszeile sagen schon, was es ist), die Knöpfe bleiben
+    // Livebetrieb → Betrieb, hinter „Überwachung“
+    'live.tabs': [{ id: 'certs', title: 'Certificates', icon: ShieldCheck, Component: CertPage, group: 'betrieb', after: 'monitor', order: 40 }],
     'dashboard.tiles': [{ id: 'certs', title: 'Certificate watch', icon: ShieldCheck, size: 'third', Component: CertTile }],
   },
 };
