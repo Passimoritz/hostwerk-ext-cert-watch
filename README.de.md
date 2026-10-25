@@ -6,6 +6,8 @@ Alle Zertifikate auf einen Blick: Hostwerks eigene und beliebige Hosts – wie l
 
 [English](README.md) · Offizielle [Hostwerk](https://github.com/Passimoritz/hostwerk-public)-Erweiterung (native Erweiterung, ab Hostwerk 2.11)
 
+![Bildschirmfoto](docs/screenshot.de.png)
+
 ## Was sie kann
 
 - **Wo:** Livebetrieb → Betrieb → Zertifikate und Übersichtskachel – seit 2.1.0 ohne eigenen Seitenleisten-Eintrag; die ganze Seite bleibt unter Erweiterungen → Öffnen
@@ -22,6 +24,12 @@ An den Hosts ändert sich nichts – nur der TLS-Handshake (bei SMTP dazu EHLO/S
 ## Für andere Erweiterungen
 
 Dienst `certWatch`: `list()` (alle Zertifikate, kürzeste Restlaufzeit zuerst) und `summary()` – etwa für eine Statusseite oder die Uptime-Wand.
+
+## Installieren
+
+In Hostwerk: **Erweiterungen → Entdecken** und „Installieren“ klicken.
+
+Native Erweiterungen laufen als Teil von Hostwerk (eigener Server- und Oberflächen-Teil). Deshalb installiert Hostwerk sie nur aus dem offiziellen Katalog (mit Prüfsumme) oder im Entwickler-Modus.
 
 ## Daten
 

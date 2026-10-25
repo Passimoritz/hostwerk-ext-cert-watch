@@ -6,6 +6,8 @@ All certificates at a glance: Hostwerk’s own and any host – how long they ar
 
 [Deutsch](README.de.md) · An official [Hostwerk](https://github.com/Passimoritz/hostwerk-public) extension (native extension, Hostwerk 2.11 or newer)
 
+![Screenshot](docs/screenshot.png)
+
 ## What it does
 
 - **Where:** Go live → Operate → Certificates and the dashboard tile – no own sidebar entry since 2.1.0; the full page stays under Extensions → Open
@@ -22,6 +24,12 @@ Nothing is changed on the hosts – only the TLS handshake (and EHLO/STARTTLS fo
 ## For other extensions
 
 Service `certWatch`: `list()` (all certificates, shortest time left first) and `summary()` – for example for a status page or the uptime wall.
+
+## Install
+
+In Hostwerk: **Extensions → Discover** and click “Install”.
+
+Native extensions run as part of Hostwerk (own server and interface part). That is why Hostwerk only installs them from the official catalogue (with checksum) or in developer mode.
 
 ## Data
 
