@@ -10,7 +10,7 @@ Alle Zertifikate auf einen Blick: Hostwerks eigene und beliebige Hosts – wie l
 
 ## Was sie kann
 
-- **Wo:** Livebetrieb → Betrieb → Zertifikate und Übersichtskachel – seit 2.1.0 ohne eigenen Seitenleisten-Eintrag; die ganze Seite bleibt unter Erweiterungen → Öffnen
+- **Wo:** System → Zertifikate (seit 2.2.0, vorher unter Livebetrieb) und Übersichtskachel – seit 2.1.0 ohne eigenen Seitenleisten-Eintrag; die ganze Seite bleibt unter Erweiterungen → Öffnen
 - Let’s-Encrypt-Zertifikate, das lokale Server-Zertifikat und die lokale Zertifizierungsstelle
 - Beliebige Hosts und Ports per TLS-Handshake: Mailserver (465, 993, 995, SMTP 25/587 mit STARTTLS), Router, NAS, fremde Seiten
 - Eigene Mailserver (Erweiterung „Mailserver“) werden von selbst überwacht

@@ -1,3 +1,9 @@
+# Changelog
+
+## 2.2.0
+
+- Moved to System → Certificates (before: Go live → Operate) – certificates are part of this PC's state, and Go live has one tab less. / Umgezogen nach System → Zertifikate (vorher Livebetrieb → Betrieb) – Zertifikate gehören zum Zustand dieses PCs, und der Livebetrieb hat einen Reiter weniger.
+
 ## 2.1.1
 
 - New animated icon and banner in the common Hostwerk style (isometric block). / Neues animiertes Symbol und Banner im gemeinsamen Hostwerk-Stil (isometrischer Block).

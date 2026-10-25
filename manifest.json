@@ -9,7 +9,7 @@
     "de": "Alle Zertifikate auf einen Blick: Hostwerks eigene und beliebige Hosts (Mailserver, Router, fremde Seiten) – Restlaufzeit, Aussteller, Namen, Kette und Schlüssel, fehlende Zertifikate per Knopf, Benachrichtigung vor dem Ablauf. Mit Kachel für die Übersicht.",
     "en": "All certificates at a glance: Hostwerk’s own and any host (mail server, router, other sites) – time left, issuer, names, chain and key, missing certificates with one button, alerts before they expire. With a dashboard tile."
   },
-  "version": "2.1.1",
+  "version": "2.2.0",
   "author": "Hostwerk",
   "homepage": "https://github.com/Passimoritz/hostwerk-ext-cert-watch",
   "license": "MIT",
