@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+
+- Backups and System rebuilt (Hostwerk with SDK 3.12): the certificates are a section in Go live → Protection (#/live/schutz/certs) – expiring certificates belong to the addresses you show to the outside; Hostwerk with SDK 3.11 shows the section there too, older versions keep the tab System → Certificates. / Sicherungen und System neu (Hostwerk mit SDK 3.12): Die Zertifikate sind ein Abschnitt unter Livebetrieb → Schutz (#/live/schutz/certs) – ablaufende Zertifikate gehören zu den Adressen, die du nach außen zeigst; Hostwerk mit SDK 3.11 zeigt den Abschnitt ebenfalls dort, ältere Versionen behalten den Reiter System → Zertifikate.
+
 ## 2.2.1
 
 - Links point to the new places in Go live: Online (domains) and Monitoring → Watchers (Hostwerk with SDK 3.11). / Links zeigen auf die neuen Orte im Livebetrieb: Online (Domains) und Überwachung → Wächter (Hostwerk mit SDK 3.11).

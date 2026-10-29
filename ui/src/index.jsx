@@ -185,13 +185,22 @@ function CertTile() {
   );
 }
 
+/** Die ganze Seite als Abschnitt: wie bei den Reitern ohne eigenen Titelblock (.ext-embedded), die Knöpfe bleiben. */
+function CertSection() {
+  return <div className="ext-embedded"><CertPage /></div>;
+}
+
 export default {
   pages: { main: CertPage },
+  sections: {
+    // 2.3 (Hostwerk mit SDK 3.11+): Abschnitt in Livebetrieb → Schutz (#/live/schutz/certs) – abgelaufene Zertifikate sind
+    // ein Schutz-Thema der Adressen nach draußen; System ist seit SDK 3.12 Lage, Dienste, Leistung, Protokolle, Wartung, Änderungen
+    'live.schutz': [{ id: 'certs', title: 'Certificates', icon: ShieldCheck, Component: CertSection, order: 40 }],
+  },
   slots: {
-    // Seit Hostwerk 3.0 (SDK 3.2) ohne eigenen Seitenleisten-Eintrag ("nav": false) – die ganze Seite als Reiter im passenden Bereich;
-    // Hostwerk blendet dabei ihren Titel aus (Reiter + Herkunftszeile sagen schon, was es ist), die Knöpfe bleiben
-    // System → Zertifikate (seit 2.2.0, vorher Livebetrieb → Betrieb): Zertifikate sind ein Zustand dieses PCs und seiner Dienste
-    'system.tabs': [{ id: 'certs', title: 'Certificates', icon: ShieldCheck, Component: CertPage, order: 40 }],
+    // Ältere Hostwerk (vor SDK 3.11): Reiter System → Zertifikate (seit 2.2.0, vorher Livebetrieb → Betrieb), ganze Seite,
+    // Hostwerk blendet ihren Titel aus. fallback: true – Hostwerk mit Abschnitten lässt ihn weg (Abschnitt live.schutz oben).
+    'system.tabs': [{ id: 'certs', title: 'Certificates', icon: ShieldCheck, Component: CertPage, order: 40, fallback: true }],
     'dashboard.tiles': [{ id: 'certs', title: 'Certificate watch', icon: ShieldCheck, size: 'third', Component: CertTile }],
   },
 };
