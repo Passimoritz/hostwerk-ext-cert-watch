@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1
+
+- Links point to the new places in Go live: Online (domains) and Monitoring → Watchers (Hostwerk with SDK 3.11). / Links zeigen auf die neuen Orte im Livebetrieb: Online (Domains) und Überwachung → Wächter (Hostwerk mit SDK 3.11).
+
 ## 2.2.0
 
 - Moved to System → Certificates (before: Go live → Operate) – certificates are part of this PC's state, and Go live has one tab less. / Umgezogen nach System → Zertifikate (vorher Livebetrieb → Betrieb) – Zertifikate gehören zum Zustand dieses PCs, und der Livebetrieb hat einen Reiter weniger.

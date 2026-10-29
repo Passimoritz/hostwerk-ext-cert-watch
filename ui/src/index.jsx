@@ -112,7 +112,7 @@ function Missing({ list, reload }) {
       {list.map((m) => (
         <div key={m.domain} className="row-tight cw-missing">
           <span className="grow small">{m.domain} <span className="muted">({m.web})</span></span>
-          {m.webId && m.vhostId ? <Btn className="xs" icon={Lock} busy={busy === m.domain} onClick={() => get(m)}>Get certificate</Btn> : <a className="btn xs ghost" href="#/live/domains">Domains</a>}
+          {m.webId && m.vhostId ? <Btn className="xs" icon={Lock} busy={busy === m.domain} onClick={() => get(m)}>Get certificate</Btn> : <a className="btn xs ghost" href="#/live/online">Domains</a>}
         </div>
       ))}
     </Callout>
@@ -160,7 +160,7 @@ function CertPage() {
       {d.certs.remind && (
         <Callout kind={d.certs.remind.on ? 'info' : 'warn'} dismissible={false} title={d.certs.remind.on ? 'Hostwerk reminds you' : 'Reminders are off'}>
           <div className="small">{d.certs.remind.on ? t('{days} days before expiry you get one message each – on your phone and the alerts you set up.', { days: C.daysList(d.certs.remind.days, locale().slice(0, 2)) }) : 'Switch them on under Live → Monitoring so no certificate expires unnoticed.'}</div>
-          <div className="row-tight cw-remind"><a className="btn sm ghost" href="#/live/monitor"><BellRing size={14} />Set up reminders</a></div>
+          <div className="row-tight cw-remind"><a className="btn sm ghost" href="#/live/ueberwachung/waechter"><BellRing size={14} />Set up reminders</a></div>
         </Callout>
       )}
     </div>
