@@ -7,7 +7,7 @@
  *   POST   /api/cert-watch/check            check all hosts now        POST /api/cert-watch/hosts/:id/check one host
  * Besides Hostwerk's own certificates (Let's Encrypt, local certificate, local CA) it watches any host and port with a TLS
  * handshake – own mail servers (Stalwart, James) are added by themselves. Checks every few hours (setting), alerts through
- * Hostwerk's notifications when a certificate becomes due or a check fails, and shows up under Live → Watchers.
+ * Hostwerk's notifications when a certificate becomes due or a check fails, and shows up under Go live → Monitoring → Watchers.
  * Service "certWatch" for other extensions (status page, uptime wall): list(), summary().
  * Data: data/cert-watch/hosts.json
  */

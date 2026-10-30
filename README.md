@@ -16,7 +16,7 @@ All certificates at a glance: Hostwerk’s own and any host – how long they ar
 - Your own mail servers (extension “Mail server”) are watched by themselves
 - Details per certificate: issuer, names (SAN), chain, key strength, whether the system trusts it
 - Missing certificates for public domains with one button (“Get certificate”)
-- Thresholds “due soon” and “critical” in Settings → Notifications & logs; notifications through Hostwerk’s alerts and a watcher under Live → Watchers
+- Thresholds “due soon” and “critical” in Settings → Notifications; notifications through Hostwerk’s messages (Go live → Monitoring → Messages) and a watcher under Go live → Monitoring → Watchers
 - Dashboard tile with the next certificate to expire
 
 Nothing is changed on the hosts – only the TLS handshake (and EHLO/STARTTLS for SMTP).

@@ -16,7 +16,7 @@ Alle Zertifikate auf einen Blick: Hostwerks eigene und beliebige Hosts – wie l
 - Eigene Mailserver (Erweiterung „Mailserver“) werden von selbst überwacht
 - Details je Zertifikat: Aussteller, Namen (SAN), Kette, Schlüsselstärke, ob das System ihm vertraut
 - Fehlende Zertifikate für öffentliche Domains per Knopf („Zertifikat holen“)
-- Schwellen „bald fällig“ und „kritisch“ unter Einstellungen → Benachrichtigungen & Protokolle; Benachrichtigung über Hostwerks Alarme und ein Wächter unter Livebetrieb → Wächter
+- Schwellen „bald fällig“ und „kritisch“ unter Einstellungen → Benachrichtigungen; Benachrichtigung über Hostwerks Meldungen (Livebetrieb → Überwachung → Meldungen) und ein Wächter unter Livebetrieb → Überwachung → Wächter
 - Kachel für die Übersicht mit dem nächsten ablaufenden Zertifikat
 
 An den Hosts ändert sich nichts – nur der TLS-Handshake (bei SMTP dazu EHLO/STARTTLS).

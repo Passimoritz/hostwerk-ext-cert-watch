@@ -17,7 +17,7 @@ const when = (ts) => (ts ? new Date(ts).toLocaleString(locale(), { day: '2-digit
 const BADGE = { ok: 'ok', warn: 'warn', err: 'err', expired: 'err', unknown: '' };
 const KIND = { letsencrypt: 'Let’s Encrypt', staging: 'Let’s Encrypt (staging)', local: 'Local server certificate', ca: 'Local certificate authority', host: 'Watched host', mail: 'Mail server' };
 const daysText = (c) => (c.error ? t('Check failed') : c.days == null ? t('unknown') : c.days < 0 ? t('expired {n} days ago', { n: -c.days }) : t('{n} days left', { n: c.days }));
-// Thresholds live in Hostwerk's settings (settingsTab "notifications" = Settings → Notifications & logs)
+// Thresholds live in Hostwerk's settings (settingsTab "notifications" = Settings → Notifications)
 const openSettings = () => { location.hash = '/settings/meldungen'; };
 
 /** Reload when the server reports new results (after a check). */
@@ -155,11 +155,11 @@ function CertPage() {
         <div className="card-body">
           <AddHost reload={st.reload} />
         </div>
-        {list.length ? list.map((c) => <Row key={c.key} c={c} lim={lim} reload={st.reload} />) : <div className="card-body"><Empty icon={ShieldCheck} title="No certificates yet" text="Add a host above or get a certificate for a public domain under Live → Domains." /></div>}
+        {list.length ? list.map((c) => <Row key={c.key} c={c} lim={lim} reload={st.reload} />) : <div className="card-body"><Empty icon={ShieldCheck} title="No certificates yet" text="Add a host above or get a certificate for a public domain under Go live → Online → Addresses." /></div>}
       </div>
       {d.certs.remind && (
         <Callout kind={d.certs.remind.on ? 'info' : 'warn'} dismissible={false} title={d.certs.remind.on ? 'Hostwerk reminds you' : 'Reminders are off'}>
-          <div className="small">{d.certs.remind.on ? t('{days} days before expiry you get one message each – on your phone and the alerts you set up.', { days: C.daysList(d.certs.remind.days, locale().slice(0, 2)) }) : 'Switch them on under Live → Monitoring so no certificate expires unnoticed.'}</div>
+          <div className="small">{d.certs.remind.on ? t('{days} days before expiry you get one message each – on your phone and the alerts you set up.', { days: C.daysList(d.certs.remind.days, locale().slice(0, 2)) }) : 'Switch them on under Go live → Monitoring → Watchers so no certificate expires unnoticed.'}</div>
           <div className="row-tight cw-remind"><a className="btn sm ghost" href="#/live/ueberwachung/waechter"><BellRing size={14} />Set up reminders</a></div>
         </Callout>
       )}
