@@ -2,6 +2,7 @@
 .cw-row { display: block; }
 .cw-main { display: flex; align-items: center; gap: var(--sp-2); }
 .cw-min { min-width: 0; }
+.cw-min > b { display: block; }
 .cw-ico { flex: none; margin: 0 var(--sp-1); }
 .cw-details { margin: var(--sp-2) 0 var(--sp-1) var(--sp-8); display: grid; gap: var(--sp-1); }
 .cw-wrap { overflow-wrap: anywhere; }

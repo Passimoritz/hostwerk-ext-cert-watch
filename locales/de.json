@@ -66,7 +66,6 @@
   "within the next {n} days": "in den nächsten {n} Tagen",
   "{days} days before expiry you get one message each – on your phone and the alerts you set up.": "{days} Tage vor Ablauf bekommst du je eine Nachricht – aufs Handy und an die eingerichteten Alarme.",
   "Could not load: {error}": "Laden fehlgeschlagen: {error}",
-  "{total} certificates · {soon} due soon · {expired} expired": "{total} Zertifikate · {soon} bald fällig · {expired} abgelaufen",
   "{n} checks failed": "{n} Prüfungen fehlgeschlagen",
   "Certificate check failed: {name}": "Zertifikatsprüfung fehlgeschlagen: {name}",
   "Certificate expired: {name}": "Zertifikat abgelaufen: {name}",
@@ -83,7 +82,36 @@
   "Connection refused": "Verbindung abgelehnt",
   "Host not found": "Host nicht gefunden",
   "The other side sent no certificate": "Die Gegenseite hat kein Zertifikat geschickt",
+  "expired {n} day ago": "seit {n} Tag abgelaufen",
+  "{n} day left": "noch {n} Tag",
+  "+{n} more": "+{n} weitere",
+  "{n} certificate": "{n} Zertifikat",
+  "{n} certificates": "{n} Zertifikate",
+  "{soon} due soon · {expired} expired": "{soon} bald fällig · {expired} abgelaufen",
+  "{n} check failed": "{n} Prüfung fehlgeschlagen",
+  "expired": "abgelaufen",
+  "not valid yet": "noch nicht gültig",
+  "self-signed": "selbst signiert",
+  "issued by an untrusted certificate authority": "von einer nicht vertrauenswürdigen Zertifizierungsstelle ausgestellt",
+  "unknown issuer or incomplete chain": "unbekannter Aussteller oder unvollständige Kette",
+  "revoked": "widerrufen",
+  "invalid signature": "ungültige Signatur",
+  "issued for other names": "für andere Namen ausgestellt",
+  "key too weak": "Schlüssel zu schwach",
+  "key too weak or not accepted": "Schlüssel zu schwach oder nicht akzeptiert",
+  "The other side closed the connection": "Die Gegenseite hat die Verbindung geschlossen",
+  "Host not reachable": "Host nicht erreichbar",
+  "No TLS on this port": "Auf diesem Port läuft kein TLS",
+  "TLS handshake failed": "TLS-Handshake fehlgeschlagen",
+  "Expired on {date}.": "Abgelaufen am {date}.",
+  "1 day left – valid until {date}.": "Noch 1 Tag – gültig bis {date}.",
   "$patterns": [
-    ["Mail server says {}", "Mailserver antwortet {}"]
-  ]
+    [
+      "Mail server says {}",
+      "Mailserver antwortet {}"
+    ]
+  ],
+  "expires today": "läuft heute ab",
+  "expires within 24 hours": "läuft in weniger als 24 Stunden ab",
+  "Expires today – valid until {date}.": "Läuft heute ab – gültig bis {date}."
 }

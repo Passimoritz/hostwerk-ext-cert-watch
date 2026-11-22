@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Shield, ShieldCheck, Plus, RotateCw, Trash2, ChevronDown, ChevronRight, CloudOff, Mail, Globe, Lock, KeyRound, BellRing, Settings2, RefreshCw } from 'lucide-react';
 import { post, del, useApi, on, waitJob } from '@hostwerk/api';
 import { Btn, Empty, Loading, TileEmpty, InfoTip, Callout, toast, confirmDialog } from '@hostwerk/ui';
-import { t } from '@hostwerk/i18n';
+import { t, pl } from '@hostwerk/i18n';
 import C from '../../lib/certs.js';
 import './style.css';
 
@@ -16,7 +16,9 @@ const day = (ts) => (ts ? new Date(ts).toLocaleDateString(locale(), { day: '2-di
 const when = (ts) => (ts ? new Date(ts).toLocaleString(locale(), { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '–');
 const BADGE = { ok: 'ok', warn: 'warn', err: 'err', expired: 'err', unknown: '' };
 const KIND = { letsencrypt: 'Let’s Encrypt', staging: 'Let’s Encrypt (staging)', local: 'Local server certificate', ca: 'Local certificate authority', host: 'Watched host', mail: 'Mail server' };
-const daysText = (c) => (c.error ? t('Check failed') : c.days == null ? t('unknown') : c.days < 0 ? t('expired {n} days ago', { n: -c.days }) : t('{n} days left', { n: c.days }));
+// Less than a day left: "expires today" (or "within 24 hours" when that is already tomorrow) instead of "0 days left"
+const today = (ts) => !!ts && new Date(ts).toDateString() === new Date().toDateString();
+const daysText = (c) => (c.error ? t('Check failed') : c.days == null ? t('unknown') : c.days < 0 ? pl(-c.days, 'expired {n} day ago', 'expired {n} days ago') : c.days === 0 ? (!c.expiresAt || today(c.expiresAt) ? t('expires today') : t('expires within 24 hours')) : pl(c.days, '{n} day left', '{n} days left'));
 // Thresholds live in Hostwerk's settings (settingsTab "notifications" = Settings → Notifications)
 const openSettings = () => { location.hash = '/settings/meldungen'; };
 
@@ -32,9 +34,9 @@ function Details({ c }) {
     <div className="cw-details small">
       <div><span className="muted">Issued by</span> {r.issuer || '–'}{r.issuerOrg && r.issuerOrg !== r.issuer ? ` (${r.issuerOrg})` : ''}</div>
       <div><span className="muted">Valid</span> {day(r.validFrom)} – {day(r.validTo)}</div>
-      {r.san && r.san.length > 0 && <div className="cw-wrap"><span className="muted">Names</span> {r.san.join(', ')}</div>}
+      {r.san && r.san.length > 0 && <div className="cw-wrap"><span className="muted">Names</span> {r.san.join(', ')}{r.sanCount > r.san.length ? ` ${t('+{n} more', { n: r.sanCount - r.san.length })}` : ''}</div>}
       <div><span className="muted">Key</span> {C.keyText(r) || '–'}{C.weakKey(r) ? <span className="badge warn cw-gap">weak</span> : null}{r.protocol ? ` · ${r.protocol}` : ''}</div>
-      <div><span className="muted">Trusted</span> {r.trusted ? <span className="badge ok">yes</span> : <span className="badge warn">{t('no – {why}', { why: r.trustError || t('unknown issuer') })}</span>}</div>
+      <div><span className="muted">Trusted</span> {r.trusted ? <span className="badge ok">yes</span> : <span className="badge warn">{t('no – {why}', { why: t(C.trustText(r.trustError)) })}</span>}</div>
       {r.chain && r.chain.length > 0 && (
         <div><span className="muted">Chain</span>
           <ol className="cw-chain">{r.chain.map((x, i) => <li key={i}>{x.subject || '?'} <span className="muted">{t('by {issuer}, until {date}', { issuer: x.issuer || '?', date: day(x.validTo) })}</span></li>)}</ol>
@@ -84,7 +86,7 @@ function AddHost({ reload }) {
     e.preventDefault();
     if (!ok) return;
     setBusy(true);
-    try { const h = await post('/cert-watch/hosts', { target, name }); setTarget(''); setName(''); reload({ silent: true }); if (h && h.result && h.result.error) toast.error(t('{name}: {error}', { name: h.name || `${h.host}:${h.port}`, error: t(h.result.error) })); else toast.success('Host added'); } catch (err) { toast.error(err); }
+    try { const h = await post('/cert-watch/hosts', { target, name }); setTarget(''); setName(''); reload({ silent: true }); if (h && h.result && h.result.error) toast.error(t('{name}: {error}', { name: h.name || C.addr(h.host, h.port), error: t(h.result.error) })); else toast.success('Host added'); } catch (err) { toast.error(err); }
     setBusy(false);
   };
   return (
@@ -119,7 +121,8 @@ function Missing({ list, reload }) {
   );
 }
 
-function CertPage() {
+/** embedded: as a section (Go live → Protection) – Hostwerk's card says "Certificates" already, the list needs no second title. */
+function CertPage({ embedded = false }) {
   const st = useApi('/cert-watch', [], { poll: false });
   const [busy, setBusy] = useState(false);
   useLive(st.reload);
@@ -151,7 +154,7 @@ function CertPage() {
       </div>
       {(d.certs.missing || []).length > 0 && <Missing list={d.certs.missing} reload={st.reload} />}
       <div className="card">
-        <div className="card-head"><KeyRound size={16} /><h3>All certificates</h3></div>
+        {!embedded && <div className="card-head"><KeyRound size={16} /><h3>All certificates</h3></div>}
         <div className="card-body">
           <AddHost reload={st.reload} />
         </div>
@@ -180,14 +183,14 @@ function CertTile() {
   return (
     <a className="card-body stack cw-tile" href="#/ext/cert-watch">
       {s.next && <div className="row-tight"><span className={`badge ${BADGE[C.level(s.next.days, lim)]}`}>{daysText(s.next)}</span><b className="ellipsis">{s.next.name}</b></div>}
-      <div className="small muted">{t('{total} certificates · {soon} due soon · {expired} expired', { total: s.total, soon: s.soon + s.critical, expired: s.expired })}{s.failed ? ` · ${t('{n} checks failed', { n: s.failed })}` : ''}</div>
+      <div className="small muted">{pl(s.total, '{n} certificate', '{n} certificates')} · {t('{soon} due soon · {expired} expired', { soon: s.soon + s.critical, expired: s.expired })}{s.failed ? ` · ${pl(s.failed, '{n} check failed', '{n} checks failed')}` : ''}</div>
     </a>
   );
 }
 
 /** Die ganze Seite als Abschnitt: wie bei den Reitern ohne eigenen Titelblock (.ext-embedded), die Knöpfe bleiben. */
 function CertSection() {
-  return <div className="ext-embedded"><CertPage /></div>;
+  return <div className="ext-embedded"><CertPage embedded /></div>;
 }
 
 export default {

@@ -75,25 +75,36 @@ function createService(host, deps = {}) {
     const prev = rec.alerted || null;
     rec.alerted = ['warn', 'err', 'expired', 'failed'].includes(lv) ? lv : null;
     if (!rec.alerted || prev === lv || !settings().notify) return;
-    const name = h.name || `${h.host}:${h.port}`;
+    const name = h.name || C.addr(h.host, h.port);
     const title = lv === 'failed' ? host.t('Certificate check failed: {name}', { name }) : lv === 'expired' ? host.t('Certificate expired: {name}', { name }) : host.t('Certificate expires soon: {name}', { name });
-    const text = lv === 'failed' ? String(r.error) : host.t('{n} days left – valid until {date}.', { n: r.daysLeft, date: new Date(r.validTo).toISOString().slice(0, 10) });
+    const date = r.validTo && Number.isFinite(new Date(r.validTo).getTime()) ? new Date(r.validTo).toISOString().slice(0, 10) : '?';
+    const text = lv === 'failed' ? host.t(String(r.error)) : lv === 'expired' ? host.t('Expired on {date}.', { date }) : r.daysLeft === 0 ? host.t('Expires today – valid until {date}.', { date }) : r.daysLeft === 1 ? host.t('1 day left – valid until {date}.', { date }) : host.t('{n} days left – valid until {date}.', { n: r.daysLeft, date });
     try { if (ctx.monitor && ctx.monitor.send) ctx.monitor.send(title, text, { kind: lv === 'warn' ? 'warn' : 'error', event: 'cert', force: true }).catch(() => {}); } catch { /* notifications are optional */ }
   };
 
   const watcher = () => {
     const lim = settings().limits;
     const list = C.collect(hostwerkCerts(), hosts());
-    const bad = list.filter((c) => c.error || ['err', 'expired'].includes(C.level(c.days, lim)));
+    // Expired and failed first (failed checks have no days and would otherwise drop out of the first five)
+    const rank = (c) => (c.error ? 1 : C.level(c.days, lim) === 'expired' ? 0 : 2);
+    const bad = list.filter((c) => c.error || ['err', 'expired'].includes(C.level(c.days, lim))).sort((a, b) => rank(a) - rank(b));
     try {
       host.watcher({
         id: 'certs', label: host.t('Certificates'), href: '/ext/cert-watch', state: bad.length ? 'alert' : list.length ? 'ok' : 'off',
-        detail: bad.length ? bad.map((c) => c.name).slice(0, 5).join(', ') : host.t('All certificates valid for more than {n} days', { n: lim.crit }),
+        detail: bad.length ? bad.map((c) => c.name).slice(0, 5).join(', ') + (bad.length > 5 ? ` +${bad.length - 5}` : '') : list.length ? host.t('All certificates valid for more than {n} days', { n: lim.crit }) : host.t('No certificates yet'),
       });
     } catch { /* older Hostwerk without watchers */ }
   };
 
-  const checkOne = async (h) => doProbe({ host: h.host, port: h.port, servername: h.servername, starttls: h.starttls || null });
+  // A timeout is tried once more before it counts: under load (busy PC, many hosts at once) every open check would otherwise
+  // report "No answer" at the same moment – one false alarm per host
+  const checkOne = async (h) => {
+    const o = { host: h.host, port: h.port, servername: h.servername, starttls: h.starttls || null };
+    const r = await doProbe(o);
+    if (!r || r.error !== 'No answer (timeout)') return r;
+    if (deps.retryDelay !== 0) await new Promise((res) => setTimeout(res, deps.retryDelay || 1500));
+    return doProbe(o);
+  };
 
   let running = null;
   /** Check all hosts (or one) and remember the results. */

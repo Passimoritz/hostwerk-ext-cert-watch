@@ -18,6 +18,7 @@
   "color": "#0f766e",
   "category": "security",
   "hostwerk": ">=2.11.0",
+  "sdkVersion": "3.16",
   "permissions": [
     "native"
   ],

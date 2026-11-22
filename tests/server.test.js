@@ -131,3 +131,22 @@ test('notifications can be switched off', async () => {
   await svc.add({ target: 'x.example' });
   assert.strictEqual(sent.length, 0);
 });
+
+test('a timeout is tried once more before it counts', async () => {
+  const { createService: make } = require('../server/index');
+  const host = { id: 'cert-watch', ctx: { paths: { data: fs.mkdtempSync(path.join(os.tmpdir(), 'cw-retry-')) }, extMarket: { settingsFor: () => ({}) } }, t: (s) => s, error: (st, m) => Object.assign(new Error(m), { status: st }), watcher: () => {}, broadcast: () => {} };
+  let n = 0;
+  const flaky = async (o) => { n++; return n === 1 ? { error: 'No answer (timeout)', checkedAt: Date.now() } : { subject: o.host, daysLeft: 50, validTo: Date.now() + 50 * 86400000, checkedAt: Date.now() }; };
+  const svc = make(host, { probe: flaky, retryDelay: 0 });
+  const h = await svc.add({ target: 'busy.example:443' });
+  assert.strictEqual(n, 2, 'tried twice');
+  assert.strictEqual(h.result.daysLeft, 50, 'the second answer counts');
+  let m = 0;
+  const dead = async () => { m++; return { error: 'No answer (timeout)', checkedAt: Date.now() }; };
+  const h2 = await make(host, { probe: dead, retryDelay: 0 }).add({ target: 'dead.example:443' });
+  assert.strictEqual(m, 2);
+  assert.strictEqual(h2.result.error, 'No answer (timeout)', 'still no answer → reported');
+  let k = 0;
+  await make(host, { probe: async () => { k++; return { error: 'Connection refused' }; }, retryDelay: 0 }).add({ target: 'refused.example:443' });
+  assert.strictEqual(k, 1, 'other errors are not repeated');
+});
